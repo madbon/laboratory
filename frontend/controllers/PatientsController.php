@@ -8,6 +8,7 @@ use backend\models\PatientsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * PatientsController implements the CRUD actions for Patients model.
@@ -36,7 +37,7 @@ class PatientsController extends Controller
     public function actionIndex()
     {
         $searchModel = new PatientsSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);;
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -64,12 +65,14 @@ class PatientsController extends Controller
     public function actionCreate()
     {
         $model = new Patients();
+        $data = array("MALE"=>"MALE", "FEMALE"=>"FEMALE");
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->patient_c]);
+            return $this->redirect(['index', 'id' => $model->patient_c]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'data' => $data,
             ]);
         }
     }
@@ -83,12 +86,14 @@ class PatientsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $data = array("MALE"=>"MALE", "FEMALE"=>"FEMALE");
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->patient_c]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'data' => $data,
             ]);
         }
     }

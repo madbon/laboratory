@@ -1,0 +1,72 @@
+.custompanel
+{
+	border:1px solid rgb(200,200,200); 
+	padding:10px;
+}
+
+.custom_p
+{
+	font-size: 15px; 
+	font-weight: bold; 
+	color: royalblue
+}
+
+input, textarea
+{
+	text-transform: uppercase;
+}
+
+table.detail-view tbody tr th
+{
+	width: 20%;
+	border:0px;
+
+}
+
+table.detail-view tbody tr td:before
+{
+	width: 80%;
+	border:0px;
+	content: ": ";
+	padding-right: 20px;
+
+}
+
+table.detail-view tbody tr td
+{
+	font-size: 15px;
+}
+
+
+
+.detail-view > tbody > tr:nth-child(odd) > td
+{
+	border:0px;
+}
+
+.detail-view>thead>tr>th, .detail-view>tbody>tr>th, .detail-view>tfoot>tr>th, .detail-view>thead>tr>td, .detail-view>tbody>tr>td, .detail-view>tfoot>tr>td
+{
+	border:0px;
+}
+
+span.search_link
+{
+	font-size: 15px;
+	text-decoration: underline;
+	color:royalblue;
+	padding-left: 20px;
+	cursor: pointer;
+}
+
+span.search_close
+{
+	font-size: 15px;
+	text-decoration: underline;
+	color:red;
+	display: none;
+	cursor: pointer;
+}
+.search_panel
+{
+	display: none;
+}

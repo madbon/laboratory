@@ -15,29 +15,35 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'patient_c') ?>
+    
 
-    <?= $form->field($model, 'first_name') ?>
+    <div class="row">
+        <div class="col-sm-2">
+            <?= $form->field($model, 'first_name') ?>
+            <?= $form->field($model, 'patient_c') ?>
+        </div>
+        <div class="col-sm-2">
+            <?= $form->field($model, 'middle_name') ?>
+            <?= $form->field($model, 'locale') ?>
+        </div>
+        <div class="col-sm-2">
+            <?= $form->field($model, 'last_name') ?>
+            <?= $form->field($model, 'district') ?>
+        </div>
+        <div class="col-sm-2">
+            <?= $form->field($model, 'sex') ?>
+            <?= $form->field($model, 'division') ?>
+        </div>
+        <div class="col-sm-2">
+            <?= $form->field($model, 'contact_number') ?>
+            <?= $form->field($model, 'complete_address') ?>
+        </div>
+        <div class="col-sm-2">
+            <?= $form->field($model, 'dob') ?>
+        </div>
+    </div>
 
-    <?= $form->field($model, 'middle_name') ?>
-
-    <?= $form->field($model, 'last_name') ?>
-
-    <?= $form->field($model, 'sex') ?>
-
-    <?php // echo $form->field($model, 'contact_number') ?>
-
-    <?php // echo $form->field($model, 'dob') ?>
-
-    <?php // echo $form->field($model, 'locale') ?>
-
-    <?php // echo $form->field($model, 'district') ?>
-
-    <?php // echo $form->field($model, 'division') ?>
-
-    <?php // echo $form->field($model, 'complete_address') ?>
-
-    <?php // echo $form->field($model, 'date_created') ?>
+    <?php // $form->field($model, 'date_created') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

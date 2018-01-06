@@ -36,7 +36,7 @@ class Patients extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['first_name', 'middle_name', 'last_name', 'sex', 'contact_number', 'dob', 'locale', 'district', 'division', 'complete_address'], 'required'],
+            [['first_name', 'last_name', 'sex'], 'required'],
             [['date_created'], 'safe'],
             [['first_name', 'middle_name', 'last_name', 'locale', 'district', 'division'], 'string', 'max' => 50],
             [['sex'], 'string', 'max' => 10],
@@ -51,13 +51,13 @@ class Patients extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'patient_c' => 'Patient C',
+            'patient_c' => 'Laboratory Number',
             'first_name' => 'First Name',
             'middle_name' => 'Middle Name',
             'last_name' => 'Last Name',
             'sex' => 'Sex',
             'contact_number' => 'Contact Number',
-            'dob' => 'Dob',
+            'dob' => 'Date Of Birth',
             'locale' => 'Locale',
             'district' => 'District',
             'division' => 'Division',

@@ -6,16 +6,17 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Patients */
 
-$this->title = 'Create Patients';
+$this->title = 'Add Patients';
 $this->params['breadcrumbs'][] = ['label' => 'Patients', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="patients-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h3><span class="fa fa-plus"></span> <?= Html::encode($this->title) ?></h3>
 
     <?= $this->render('_form', [
         'model' => $model,
+        'data' => $data,
     ]) ?>
 
 </div>

@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Patients */
 
-$this->title = $model->patient_c;
+$this->title = $model->last_name.', '.$model->first_name.' '.$model->middle_name;
 $this->params['breadcrumbs'][] = ['label' => 'Patients', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -28,13 +28,50 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'patient_c',
-            'first_name',
-            'middle_name',
-            'last_name',
+            // 'patient_c',
+            // 'first_name',
+            // 'middle_name',
+            // 'last_name',
             'sex',
             'contact_number',
-            'dob',
+            [                     
+                'label' => 'Date of Birth',
+                'value' => function ($model) {
+                    return date("F j, Y", strtotime($model->dob));
+                },
+            ],
+            [
+              'label' => 'Age',
+              'attribute' => 'age',
+              'value' => function($model){
+                $age = date('m') - date('m',strtotime($model->dob));
+                if($age > 0){
+                    $age = date('Y') - date('Y',strtotime($model->dob));
+                }
+                else{
+                    if($age < 0){
+                        $age = date('Y') - date('Y',strtotime($model->dob)) - 1;
+                    }
+                    else{
+                        $age = date('d') - date('d',strtotime($model->dob));
+                        if($age < 0){
+                            $age = date('Y') - date('Y',strtotime($model->dob)) - 1;
+                        }
+                        else{
+                            $age = date('Y') - date('Y',strtotime($model->dob));    
+                        }
+                    }
+                }
+                //$age = $model->BIRTHDATE.', '.- $model->BIRTHDATE;
+                // if($age >= 0){
+                // $age = date('Y') - date('Y',strtotime($model->BIRTHDATE));
+                // }
+                // else{
+                // $age = date('Y') - date('Y',strtotime($model->BIRTHDATE)) - 1;
+                // }
+                return $age.' year(s) old';
+              },
+            ],
             'locale',
             'district',
             'division',
