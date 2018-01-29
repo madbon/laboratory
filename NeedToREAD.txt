@@ -1,0 +1,4 @@
+php composer.phar global require "fxp/composer-asset-plugin:~1.1.1"
+
+token
+df61f3e4e3f0c67a388e46ee4ecbc8a54b0c654f

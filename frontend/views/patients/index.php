@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\PatientsSearch */
@@ -23,14 +23,16 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
     <p>
-        <?= Html::a('<span class="fa fa-plus"></span> Add Patients', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('<span class="fa fa-plus"></span> Register Patient(s)', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
+<?php Pjax::begin(); ?>    
+
+    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'options' => ['table table-responsive'],
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            // ['class' => 'kartik\grid\SerialColumn'],
 
             // 'patient_c',
             [
@@ -110,26 +112,40 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'district',
             // 'division',
             // 'complete_address',
-            // 'date_created',
+            [                     
+                'label' => 'Date Registered',
+                'attribute' => 'dob',
+                'value' => function ($model) {
+                    return date("F j, Y", strtotime($model->date_created));
+                },
+            ],
 
-            ['class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update} {delete} ',
+            ['class' => 'kartik\grid\ActionColumn',
+                'template' => '{createtest} {view} {update} {delete} ',
                 'buttons'=>[
+                        'createtest' => function($url, $model){
+                             return Html::a('<span class="glyphicon glyphicon-plus"></span> Create Laboratory Test', ['laboratory-test/create-lab-test', 
+                                'patient_c' => $model->patient_c], ['class'=>'btn btn-success btn-xs btn-block']);
+                        },
                         'view' => function($url, $model){
                              return Html::a('<span class="glyphicon glyphicon-eye-open"></span> View', ['view', 
-                                'id' => $model->patient_c], ['class'=>'btn btn-info btn-xs']);
+                                'id' => $model->patient_c], ['class'=>'btn btn-info btn-xs btn-block']);
                         },
                         'update' => function($url, $model){
                              return Html::a('<span class="glyphicon glyphicon-edit"></span> Update', ['update', 
-                                'id' => $model->patient_c], ['class'=>'btn btn-primary btn-xs']);
+                                'id' => $model->patient_c], ['class'=>'btn btn-primary btn-xs btn-block']);
                         },
-                        'delete' => function($url, $model){
-                             return Html::a('<span class="glyphicon glyphicon-trash"></span> Delete', $url,[
-                                    'title' => Yii::t('app', 'Delete'),
-                                    'data-confirm' => Yii::t('yii', 'Are you sure you want to delete?'),
-                                    'data-method' => 'post', 'data-pjax' => '0',
-                                    'class' => 'btn btn-danger btn-xs'
-                        ]);
+                        'delete'=>function ($url, $model) {
+                            return Html::a('<i class="glyphicon glyphicon-trash"></i> Delete', 
+                            [
+                              'delete', 'id' => $model->patient_c
+                            ], 
+                            [
+                              'class' => 'btn btn-danger btn-xs btn-block',
+                              'data' => [
+                                  'confirm' => 'Are you sure you want to delete this?',
+                                  'method' => 'post']
+                            ]);
                         }
                     ],
         ],

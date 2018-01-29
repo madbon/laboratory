@@ -9,6 +9,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
+use yii\bootstrap\Modal;
 
 AppAsset::register($this);
 ?>
@@ -22,9 +23,36 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <?php $this->registerJs('
+        $(document).ready(function(){
+            $(".btn-xs").addClass("btn-block");
+            $(".kv-grid-table").removeClass("table-responsive");
+            $(".kv-grid-table").removeClass("table-bordered");
+            $(".kv-grid-table").removeClass("table-striped");
+
+             $(".modalButton").click(function(){
+                $("#modal").modal("show")
+                    .find("#modalContent")
+                    .load($(this).attr("value"));
+            });
+        });
+    ');?>
 </head>
 <body class="skin-black fixed">
 <?php $this->beginBody() ?>
+
+<?php
+    Modal::begin([
+        // 'header'=>'<h4>Person</h4>',
+            'id'=>'modal',
+            'size'=>'modal-lg',
+            'options' => [
+            'tabindex' => false // important for Select2 to work properly
+            ],
+        ]);
+        echo '<div id="modalContent"></div>';
+    Modal::end();
+?>
         <!-- header logo: style can be found in header.less -->
         <header class="header">
             <a href="../index.html" class="logo">
@@ -109,7 +137,10 @@ AppAsset::register($this);
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="#transaction"><i class="fa fa-plus"></i> Transaction</a></li>
+                                <li>
+                                    <a href="#transaction"><i class="fa fa-plus"></i> Transaction</a>
+
+                                </li>
                                 <li><a href="#settings"><i class="fa fa-cog"></i> Settings</a></li>
                                 
                             </ul>
@@ -120,7 +151,9 @@ AppAsset::register($this);
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="#managepatient"><i class="fa fa-edit"></i> Manage Patient</a></li>
+                                <li>
+                                    <?= Html::a('<i class="fa fa-edit"></i> Manage Patient', ['patients/index'], ['class' => ''])?>
+                                </li>
                                 <li><a href="#today"><i class="fa fa-calendar"></i> Today's Patient(s)</a></li>
                                 <li><a href="#today"><i class="fa fa-calendar"></i> Patient's History</a></li>
                                 <li><a href=#settings"><i class="fa fa-cog"></i> Settings</a></li>

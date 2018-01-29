@@ -1,0 +1,4 @@
+table.kv-grid-table tbody tr td
+{
+	text-transform: uppercase;
+}

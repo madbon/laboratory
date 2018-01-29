@@ -35,8 +35,7 @@ use kartik\select2\Select2;
                     'pluginOptions' => [
                         'allowClear' => true
                     ],
-                ]);
-                ?>
+                ]);?>
             </div>
             <div class="col-sm-4">
                 <?= $form->field($model, 'contact_number')->textInput(['maxlength' => true]) ?>
@@ -79,11 +78,7 @@ use kartik\select2\Select2;
             <div class="col-sm-6">
             </div>
         </div>
-
-        
     </div>
-
-    
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Save' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

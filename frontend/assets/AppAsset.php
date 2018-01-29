@@ -17,7 +17,10 @@ class AppAsset extends AssetBundle
         'AdminLTE/css/font-awesome.min.css',
         'AdminLTE/css/ionicons.min.css',
         'AdminLTE/css/AdminLTE.css',
-        'css/frontend-custom.css'
+        'css/frontend-custom.css',
+        'css/kartikgrid_custom.css',
+        'css/buttons_custom.css',
+        'css/detailview_custom.css'
     ];
     public $js = [
         'AdminLTE/js/bootstrap.min.js',

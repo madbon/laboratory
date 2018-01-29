@@ -3,8 +3,8 @@
 namespace frontend\controllers;
 
 use Yii;
-use backend\models\Patients;
-use backend\models\PatientsSearch;
+use common\models\Patients;
+use common\models\PatientsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -66,9 +66,19 @@ class PatientsController extends Controller
     {
         $model = new Patients();
         $data = array("MALE"=>"MALE", "FEMALE"=>"FEMALE");
+        
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index', 'id' => $model->patient_c]);
+        if ($model->load(Yii::$app->request->post())) {
+            $valid = $model->validate();
+            if ($valid) {
+                $model->save();
+                return $this->redirect(['index']);
+            }else
+            {
+                return $this->redirect(['index', 'PatientsSearch[first_name]'=>$model->first_name,'PatientsSearch[middle_name]'=>$model->middle_name,'PatientsSearch[last_name]'=>$model->last_name]);
+            }
+
+            
         } else {
             return $this->render('create', [
                 'model' => $model,
