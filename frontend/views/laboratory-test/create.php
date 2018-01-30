@@ -41,6 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model_blood' => $model_blood,
         'model_serum' => $model_serum,
         'model_misc' => $model_misc,
+        'model_urin' => $model_urin,
     ]) ?>
 
 </div>

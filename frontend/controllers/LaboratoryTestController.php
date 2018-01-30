@@ -12,6 +12,7 @@ use backend\models\MedicalTechnologist;
 use common\models\BloodChemistry;
 use common\models\SerumElectrolytes;
 use common\models\Miscellaneous;
+use common\models\UrinalysisFecalysis;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -104,6 +105,7 @@ class LaboratoryTestController extends Controller
         $model_blood = new BloodChemistry();
         $model_serum = new SerumElectrolytes();
         $model_misc = new Miscellaneous();
+        $model_urin = new UrinalysisFecalysis();
 
         $fullname = ArrayHelper::map(Patients::find()->all(), 'patient_c', 'fullName');
         $bloodtype = ArrayHelper::map(BloodType::find()->all(), 'blood_type_c', 'blood_type');
@@ -132,6 +134,7 @@ class LaboratoryTestController extends Controller
             'model_blood' => $model_blood,
             'model_serum' => $model_serum,
             'model_misc' => $model_misc,
+            'model_urin' => $model_urin,
             // 'fullname' => $fullname,
 
         ]);
